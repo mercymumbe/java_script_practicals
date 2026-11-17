@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+   <!-- Link the CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <body>
+
+    <h2>Working with localStorage</h2>
+
+    <label>Enter Key:</label>
+    <input type="text" id="key">
+
+    <br><br>
+
+    <label>Enter Value:</label>
+    <input type="text" id="value">
+
+    <br><br>
+
+    <button id="setBtn">Set Item</button>
+    <button id="getBtn">Get Item</button>
+    <button id="removeBtn">Remove Item</button>
+
+    <p id="result"></p>
+
+    <script>
+        const keyInput = document.getElementById("key");
+        const valueInput = document.getElementById("value");
+        const result = document.getElementById("result");
+
+        document.getElementById("setBtn").addEventListener("click", () => {
+            localStorage.setItem(
+                keyInput.value,
+                valueInput.value
+            );
+
+            result.textContent = "Item stored successfully.";
+        });
+
+        document.getElementById("getBtn").addEventListener("click", () => {
+            const value = localStorage.getItem(keyInput.value);
+
+            result.textContent = value ?? "No item found.";
+        });
+
+        document.getElementById("removeBtn").addEventListener("click", () => {
+            localStorage.removeItem(keyInput.value);
+
+            result.textContent = "Item removed successfully.";
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,594 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--white);
+    min-height: 100vh;
+    padding: 30px 20px;
+    line-height: 1.5;
+}
+
+/* ===================================
+   2. MAIN LAYOUT
+=================================== */
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.3fr 0.8fr;
+    gap: 25px;
+    align-items: start;
+}
+
+.dashboard,
+.expense-form-panel {
+    background: var(--panel);
+    padding: 28px;
+    border-radius: 24px;
+    min-width: 0;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.expense-form-panel {
+    position: sticky;
+    top: 20px;
+}
+
+/* ===================================
+   3. HEADER
+=================================== */
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 28px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card);
+    font-size: 24px;
+}
+
+.user-info p {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.user-info h1 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+#settingsButton {
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--card);
+    color: var(--white);
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* ===================================
+   4. TOTAL EXPENSES CARD
+=================================== */
+
+.balance-card {
+    background: linear-gradient(
+        120deg,
+        #f15b4a,
+        #f58e2e
+    );
+    padding: 25px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 20px rgba(241, 91, 74, 0.12);
+}
+
+#totalLabel {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #fff3ed;
+}
+
+#totalAmount {
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    overflow-wrap: anywhere;
+}
+
+#periodSelect {
+    width: auto;
+    max-width: 130px;
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#periodSelect option {
+    background: var(--panel);
+    color: var(--white);
+}
+
+/* ===================================
+   5. SECTION HEADINGS
+=================================== */
+
+.categories-section,
+.latest-section {
+    margin-bottom: 30px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.section-heading h2,
+.expense-form-panel > h2 {
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.section-heading p,
+.expense-form-panel > p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ===================================
+   6. CATEGORY CARDS
+=================================== */
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+/* Classes for category cards created by JavaScript */
+
+.category-card {
+    background: var(--card);
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    color: var(--white);
+}
+
+.category-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--orange);
+}
+
+.category-card.active {
+    border-color: var(--orange);
+    background: #45414a;
+}
+
+.category-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #505765;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    font-size: 22px;
+}
+
+.category-card h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.category-card p {
+    font-size: 15px;
+    color: #e0e3e8;
+}
+
+.category-card.food .category-icon {
+    color: var(--green);
+}
+
+.category-card.shopping .category-icon {
+    color: var(--red);
+}
+
+.category-card.medical .category-icon {
+    color: var(--purple);
+}
+
+.category-card.transport .category-icon {
+    color: #f5bc68;
+}
+
+.category-card.bills .category-icon {
+    color: #83b8ff;
+}
+
+.category-card.other .category-icon {
+    color: #ffb59b;
+}
+
+/* ===================================
+   7. LATEST EXPENSES LIST
+=================================== */
+
+#viewAllButton {
+    border: none;
+    background: transparent;
+    color: var(--white);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#viewAllButton:hover {
+    color: var(--orange);
+}
+
+.expense-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.expense-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.expense-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.expense-icon {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #454c58;
+    font-size: 21px;
+}
+
+.expense-details {
+    min-width: 0;
+}
+
+.expense-details h3 {
+    font-size: 14px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.expense-details p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.expense-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.expense-amount {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.delete-button {
+    padding: 6px 9px;
+    border: none;
+    border-radius: 7px;
+    color: var(--white);
+    background: #9f3944;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background: #c13e4b;
+}
+
+#emptyMessage {
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    padding: 25px 0;
+}
+
+#emptyMessage[hidden] {
+    display: none;
+}
+
+/* ===================================
+   8. ADD EXPENSE FORM
+=================================== */
+
+.expense-form-panel > p {
+    margin: 5px 0 25px;
+}
+
+#expenseForm {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: #e0e3e8;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #272c35;
+    color: var(--white);
+    font-size: 14px;
+    outline: none;
+}
+
+.form-group input::placeholder {
+    color: #858c98;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px rgba(255, 116, 62, 0.12);
+}
+
+.form-group select option {
+    background: var(--panel);
+}
+
+.add-button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(
+        120deg,
+        #ed477b,
+        #f46a72
+    );
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.add-button:hover {
+    transform: translateY(-2px);
+    opacity: 0.92;
+}
+
+.add-button:active {
+    transform: scale(0.98);
+}
+
+/* ===================================
+   9. QUICK STATISTICS
+=================================== */
+
+.statistics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.statistics > div {
+    background: var(--card);
+    padding: 15px;
+    border-radius: 12px;
+    min-width: 0;
+}
+
+.statistics p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.statistics h3 {
+    font-size: 17px;
+    overflow-wrap: anywhere;
+}
+
+/* ===================================
+   10. NOTIFICATION
+=================================== */
+
+#notification {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    max-width: calc(100% - 40px);
+    padding: 14px 20px;
+    border-radius: 10px;
+    background: #3b8d76;
+    color: var(--white);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: 0.25s;
+    z-index: 100;
+}
+
+#notification.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* ===================================
+   11. RESPONSIVE DESIGN
+=================================== */
+
+@media (max-width: 900px) {
+    body {
+        padding: 20px 14px;
+    }
+
+    .app-container {
+        grid-template-columns: 1fr;
+        max-width: 650px;
+    }
+
+    .expense-form-panel {
+        position: static;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 12px 8px;
+    }
+
+    .dashboard,
+    .expense-form-panel {
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .topbar {
+        margin-bottom: 22px;
+    }
+
+    .user-info h1 {
+        font-size: 19px;
+    }
+
+    .balance-card {
+        padding: 18px;
+        border-radius: 15px;
+        gap: 8px;
+    }
+
+    #totalAmount {
+        font-size: 27px;
+    }
+
+    #periodSelect {
+        padding: 10px 7px;
+        font-size: 12px;
+    }
+
+    .category-grid {
+        gap: 10px;
+    }
+
+    .category-card {
+        padding: 14px;
+    }
+
+    .category-icon {
+        width: 38px;
+        height: 38px;
+        margin-bottom: 10px;
+    }
+
+    .expense-item {
+        gap: 8px;
+    }
+
+    .expense-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+    }
+
+    .expense-left {
+        gap: 9px;
+    }
+
+    .expense-amount {
+        font-size: 12px;
+    }
+
+    .delete-button {
+        padding: 5px 7px;
+        font-size: 11px;
+    }
+
+    .statistics {
+        gap: 8px;
+    }
+
+    .statistics > div {
+        padding: 12px;
+    }
+
+    .statistics h3 {
+        font-size: 15px;
+    }
+}
+
+
+
+2. How your CSS matches the sample
+
+
+
+
+
+
+
+
+
